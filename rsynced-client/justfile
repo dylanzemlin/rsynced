@@ -1,0 +1,20 @@
+set shell := ["bash", "-cu"]
+
+configure:
+    cmake --preset dev
+
+build:
+    cmake --build --preset dev
+
+run: build
+    ./build/rsynced-client
+
+test: build
+    ctest --test-dir build --output-on-failure
+
+release:
+    cmake --preset release
+    cmake --build --preset release
+
+clean:
+    rm -rf build build-release
